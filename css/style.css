@@ -51,3 +51,7 @@ img{
 .flex-container{
     display: flex;
 }
+
+.bloco-robo{
+    padding: 5px 300px 20px 270px;
+}

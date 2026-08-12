@@ -11,6 +11,7 @@
         <nav>
             <a href="./index.html" class="selecionado">Principal</a>
             <a href="./html/principal_robos.html">Tipos de robôs</a>
+            <a href="./html/principal_sensores.html">Sensoriamento</a>
         </nav>
     </header>
     <main>
@@ -68,7 +69,31 @@
                 A integração acontece de acordo com as necessidades de cada camada da automação. Por exemplo, a <u>Ethernet Industrial e Profinet são utilizadas para controle determinístico e em tempo real</u>. O robô recebe e transmite sinais de segurança e ordens de movimentos em milissegundos, interagindo diretamente com CLPs (Controles Lógicos Programáveis), inversores e sensores; O <u>OPC UA é projetado para a troca segura de dados estruturados</u>. O robô atua como um servidor, fornecendo metadados e informações de diagnóstico (ex.: torque, velocidade, status de falha) para sistemas SCADA e MES de forma padronizada e independente da fabricante; E o <u>MQTT, como é focado no envio leve de dados, o robô publica informações operacionais em um broker para monitoramento remoto, dashboards em nuvem ou algoritmos de Inteigência Artificial sem sobrecarregar a rede.</u> </p>
                 <img src="./media/conexao-iot-automacao.jpg" style="height: 275px; border-radius: 20px;">
             </div>
+        </div><br>
+
+
+
+
+        <h1>Introdução aos Sensores</h1>
+
+        <div class="bloco-texto">
+            <div style="text-align: center;"><h2>O que é um sensor?</h2></div>
+            <div class="flex-container">
+                <p>O sensoriamento é o ato ou processo de detectar, medir e coletar dados sobre um objeto, ambiente ou fenômeno físico por meio de dispositivos chamados sensores, sem que haja necessidade de contato físico direto. Eles transformam grandezas físicas ou químicas (como temperatura, pressão, nível e posição) em sinais elétricos interpretáveis por controladores. Sem eles, as máquinas não teriam percepção do ambiente, tornando o controle em tempo real, a eficiência e a segurança das fábricas impossíveis. <br><br>
+                A relação entre sensores, comunicação de dados e controle de processos forma o ciclo básico da automação industrial. Os sensores medem variáveis físicas do ambiente. A comunicação de dados transporta essas informações rapidamente. O sistema de controle processa tudo e ajusta as máquinas para manter a produção segura e estável.</p>
+                <img src="./media/conceito-sensores.png" style="height: 350px; border-radius: 20px;">
+            </div>
         </div>
+        <div class="bloco-texto" style="background-color: rgb(203, 205, 209);">
+            <div style="text-align: center;"><h2>Introdução ao Arduíno</h2></div>
+            <div class="flex-container">
+                <img src="./media/arduino.png" style="height: 275px; border-radius: 20px;">
+                <p>O Arduino é uma plataforma de <u>prototipagem eletrônica</u> de código aberto (open-source) composta por hardware (uma placa com microcontrolador) e software (ambiente de desenvolvimento ou IDE), criada para facilitar a criação de projetos de automação, robótica e internet das coisas (IoT) por amadores e profissionais. A placa recebe informações do mundo físico por meio de sensores, o microcontrolador analisa esses dados usando as regras que você programou, e o sistema executa uma ação, como acender uma luz, girar um motor ou emitir um som. <br><br>
+                Seu hardware é composto por pinos digitais, lendo e enviando dados apenas em ligado/desligado (0 ou 1), pinos analógicos que medem uma faixa contínua de valores de tensão (como a variação detectada por um sensor de luz ou temperatura). O software é feito por código usando o programa oficial do Arduino, e envia essa programação para a placa via USB. O código gravado fica salvo na memória interna do microcontrolador e roda de forma autônoma. <br><br>
+                Veja mais em: <a href="./html/principal_sensores.html">Sensores</a> </p>
+            </div>
+        </div>
+
     </main>
 </body>
 </html>

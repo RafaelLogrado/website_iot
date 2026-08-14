@@ -52,6 +52,27 @@ img{
     display: flex;
 }
 
+/* Robos */
 .bloco-robo{
     padding: 5px 300px 20px 270px;
+}
+
+/* Sensores */
+.bloco-sensor{
+    margin: 0 300px 0 200px;
+    text-align: left;
+}
+
+.bloco-sensor table{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.bloco-sensor tr, .bloco-sensor th{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.bloco-sensor img{
+    height: 800px;
 }

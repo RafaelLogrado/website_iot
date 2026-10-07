@@ -1,0 +1,71 @@
+/***** Quiz *****/
+.container {
+    background-color: #fff;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+/* Estilo dos botões das opções */
+.opcao {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+.opcao:hover {
+    background-color: #e0e0e0;
+}
+
+.opcao p {
+    margin: 0;
+}
+
+/* Código das questões*/
+pre {
+    background-color: #2b2b2b;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    text-align: left; 
+    margin: 15px 0;
+}
+
+pre code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    text-align: left; 
+    white-space: pre;  
+    display: block;
+}
+
+/* Mensagem de cada erro no final */
+.erro-item {
+    padding: 10px;
+    background-color: #ffe6e6;
+    border-left: 4px solid #ff4d4d;
+    margin-bottom: 10px;
+}
+
+/* Botão para refazer o quiz */
+.btn-refazer {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-refazer:hover {
+    background-color: #555;
+}

@@ -1,108 +1,102 @@
-let quiz = document.getElementById('quiz')
-let resultado = document.getElementById('resultado')
-let resultadoFinal = document.getElementById('resultadoFinal')
+const quiz = document.getElementById('quiz')
+const resultado = document.getElementById('resultado')
+const resultadoFinal = document.getElementById('resultadoFinal')
+const detalhesResultado = document.getElementById('detalhesResultado')
 
-let pergunta = document.getElementById("pergunta")
-let imagem = document.getElementById("imagem")
-let respA = document.getElementById("respA")
-let respB = document.getElementById("respB")
-let respC = document.getElementById("respC")
-let respD = document.getElementById("respD")
+const pergunta = document.getElementById("pergunta")
+const imagem = document.getElementById("imagem")
+const respA = document.getElementById("respA")
+const respB = document.getElementById("respB")
+const respC = document.getElementById("respC")
+const respD = document.getElementById("respD")
 
 let contAcerto = 0
-let contErro = 0
+let indexQuestaoAtual = 0
 
-function escolherResp(resp, questao, numq){
-    if(resp == "A"){
-        if(questao.respA.correto){
-            contAcerto++
-            questao.acertado = 'true'
-        }else{
-            contErro++
-            questao.acertado = 'false'
-        }
-    }else if(resp == "B"){
-        if(questao.respB.correto){
-            contAcerto++
-            questao.acertado = 'true'
-        }else{
-            contErro++
-            questao.acertado = 'false'
-        }
-    }else if(resp == "C"){
-        if(questao.respC.correto){
-            contAcerto++
-            questao.acertado = 'true'
-        }else{
-            contErro++
-            questao.acertado = 'false'
-        }
-    }else if(resp == "D"){
-        if(questao.respD.correto){
-            contAcerto++
-            questao.acertado = 'true'
-        }else{
-            contErro++
-            questao.acertado = 'false'
-        }
+// Pega todas as chaves (q1, q2, q3...) para facilitar a passagem de questões
+const chavesQuestoes = Object.keys(questoes)
+
+// Mapeamento dos assuntos das questões para mostrar no final
+const assuntos = {
+    q1: "Tipos de robôs",
+    q2: "Sensores (Conexões Arduino)",
+    q3: "Sensoriamento",
+    q4: "Multímetro",
+    q5: "Protótipos (Resistores)",
+    q6: "Arduino (Pinos Analógicos/PWM)",
+    q7: "ESP32(8266)",
+    q8: "Código (Funções e Parâmetros)",
+    q9: "Código (Operadores e Condicionais)",
+    q10: "Código (Retorno de Funções)"
+}
+
+function mudarQuestao() {
+    let chaveAtual = chavesQuestoes[indexQuestaoAtual]
+    let questao = questoes[chaveAtual] // Pega a questão atual
+
+    pergunta.innerHTML = questao.pergunta
+
+    // Mostra ou esconde a imagem dependendo da questão
+    if (questao.imagem) {
+        imagem.src = questao.imagem
+        imagem.style.display = 'block'
+    } else {
+        imagem.style.display = 'none'
     }
 
-    if(numq == 10){
+    // Coloca os textos nos botões
+    respA.innerHTML = `a) ${questao.respA.texto}`
+    respB.innerHTML = `b) ${questao.respB.texto}`
+    respC.innerHTML = `c) ${questao.respC.texto}`
+    respD.innerHTML = `d) ${questao.respD.texto}`
+}
+
+function escolherResp(opcaoSelecionada) {
+    let chaveAtual = chavesQuestoes[indexQuestaoAtual]
+    let questao = questoes[chaveAtual]
+
+    // Verifica se a opção que o usuário clicou (respA, respB, etc) tem "correta: true"
+    if (questao[opcaoSelecionada].correta) {
+        contAcerto++
+        questao.acertou = true
+    } else {
+        questao.acertou = false
+    }
+
+    indexQuestaoAtual++ // Vai para a próxima
+
+    // Verifica se chegou na última questão
+    if (indexQuestaoAtual < chavesQuestoes.length) {
+        mudarQuestao()
+    } else {
         finalizarQuiz()
-    }else{
-        let proxima = 'q' + (numq+1)
-        mudarQuestao(questoes[proxima])
     }
 }
 
-function mudarQuestao(questao){ // ATUALIZA QUESTÃO
-    pergunta.innerHTML = `${questao.pergunta}` // ATUALIZA PERGUNTA DA QUESTÃO
-    if(questao.imagem != false){
-        imagem.src = questao.imagem // COLOCA IMAGEM SE QUESTÃO TIVER
-    }
-
-    // ATUALIZA TEXTO E VALIDADE DAS ALTERNATIVAS
-    respA.setAttribute('correto','false')
-    respB.setAttribute('correto','false')
-    respC.setAttribute('correto','false')
-    respD.setAttribute('correto','false')
-    
-    respA.innerHTML = questao.respA.texto
-    if(questao.respA.correto){
-        respA.setAttribute('correto','true')
-    }
-
-    respB.innerHTML = questao.respB.texto
-    if(questao.respB.correto){
-        respB.setAttribute('correto','true')
-    }
-
-    respC.innerHTML = questao.respC.texto
-    if(questao.respC.correto){
-        resC.setAttribute('correto','true')
-    }
-
-    respD.innerHTML = questao.respD.texto
-    if(questao.respD.correto){
-        respD.setAttribute('correto','true')
-    }
-}
-
-function finalizarQuiz(){
-    contAcerto = 0, contErro = 0
+function finalizarQuiz() {
     quiz.style.display = 'none'
     resultado.style.display = 'block'
 
-    resultadoFinal.innerHTML = `Acertos: ${contAcerto}/10`
+    resultadoFinal.innerHTML = `Acertos: ${contAcerto} / 10`
 
-    let questoesErradas = []
-    let cont = 0
-    questoes.forEach(el => {
-        cont++
-        if(el.acertado == 'false'){
-            questoesErradas.push('Questão ' + cont)
+    let htmlDetalhes = '<h3>Detalhes (O que você errou):</h3>'
+    let erros = 0
+
+    // Passa por todas as questões para ver o que errou
+    chavesQuestoes.forEach((chave, index) => {
+        if (!questoes[chave].acertou) {
+            erros++
+            let numeroQuestao = index + 1
+            htmlDetalhes += `<p class="erro-item"><strong>Questão ${numeroQuestao}:</strong> Você errou sobre <em>${assuntos[chave]}</em>.</p>`
         }
     })
+
+    if (erros === 0) {
+        htmlDetalhes = "<p>Parabéns! Você acertou tudo!</p>"
+    }
+
+    detalhesResultado.innerHTML = htmlDetalhes
 }
 
-mudarQuestao(questoes.q1)
+// Inicia o quiz chamando a primeira questão
+mudarQuestao()

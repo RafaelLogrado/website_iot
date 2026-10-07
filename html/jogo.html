@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perguntas</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_jogo.css">
     <script src="../js/questoes.js"></script>
     <script src="../js/quiz.js"defer></script>
 </head>
@@ -24,9 +25,26 @@
         </nav>
     </header>
     <main>
-        
-        
-        
+        <div id="quiz-container" class="container">
+            <!-- Tela do Quiz -->
+            <div id="quiz">
+                <div id="pergunta"></div>
+                <img id="imagem" src="" alt="Imagem da questão" style="display: none; max-width: 100%; margin: 15px 0; border-radius: 5px;">
+                
+                <div id="opcoes">
+                    <button id="respA" class="opcao" onclick="escolherResp('respA')"></button>
+                    <button id="respB" class="opcao" onclick="escolherResp('respB')"></button>
+                    <button id="respC" class="opcao" onclick="escolherResp('respC')"></button>
+                    <button id="respD" class="opcao" onclick="escolherResp('respD')"></button>
+                </div>
+            </div>
+
+            <div id="resultado" style="display: none;">
+                <h2 id="resultadoFinal"></h2>
+                <div id="detalhesResultado"></div>
+                <button class="btn-refazer" onclick="location.reload()">Refazer Quiz</button>
+            </div>
+        </div>
     </main>
 </body>
 </html>
